@@ -1,18 +1,35 @@
-<header>
-    <h2><a href="/">Our Wonderful App</a></h2>
-    <nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Wonderful App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Our Wonderful App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
       <% if (user) { %>
-        <a href="/profile">Profile</a>
-        <a href="/library">My Library</a>
-        <a href="/create-post">Create Post</a>
-        <a href="/logout">Log Out</a>
+        <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="/library">My Library</a></li>
+        <li class="nav-item"><a class="nav-link" href="/create-post">Create Post</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
       <% } else { %>
-        <a href="/login">Log In</a>
-        <a href="/register">Sign Up</a>
+        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+        <li class="nav-item"><a class="nav-link" href="/register">Sign Up</a></li>
       <% } %>
-      <form action="/search" method="GET">
-        <input type="text" name="query" placeholder="Search...">
-        <button type="submit">Search</button>
-      </form>
-    </nav>
-  </header>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+      <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search..." aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</header>
