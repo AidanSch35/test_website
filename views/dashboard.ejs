@@ -1,26 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- include('includes/head') %>
-  <body>
-    <%- include('includes/header') %>
+<%- include('includes/header') %>
 
-    <main>
-      <% if (posts.length == 0) { %>
-      <h4>Hello <%= user.username %>, you do not have any posts yet</h4>
-      <% } else { %>
-      <h4>Hello <%= user.username %>, here are your posts</h4>
-      <% } %>
-
-      <ul>
+<div class="container">
+  <div class="mt-4">
+    <h1>My Dashboard</h1>
+    <a class="btn btn-success mb-4" href="/create-post">Create New Post</a>
+    <h2>My Posts</h2>
+    <% if (posts.length > 0) { %>
+      <ul class="list-group">
         <% posts.forEach(post => { %>
-        <li>
-          <a href="/post/<%= post.id %>"><%= post.title %></a> on <%= new Date(post.createdDate).getMonth() + 1 %>/<%= new
-          Date(post.createdDate).getDate() %>/<%= new Date(post.createdDate).getFullYear() %>
-        </li>
+          <li class="list-group-item">
+            <a href="/post/<%= post.id %>"><%= post.title %></a>
+            <span class="text-muted">- <%= new Date(post.createdDate).toLocaleDateString() %></span>
+          </li>
         <% }) %>
       </ul>
-    </main>
+    <% } else { %>
+      <p>You have no posts yet.</p>
+    <% } %>
+  </div>
+</div>
 
-    <%- include('includes/footer') %>
-  </body>
-</html>
+<%- include('includes/footer') %>

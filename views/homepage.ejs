@@ -1,45 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- include('includes/head') %>
-  <body>
-    <%- include('includes/header') %>
+<%- include('includes/header') %>
 
-    <!-- Navbar -->
-    <nav>
-      <ul>
-        <% if (!user) { %>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/register">Sign Up</a></li>
-        <% } else { %>
-          <li><a href="/profile">Profile</a></li>
-          <li><a href="/library">My Library</a></li>
-        <% } %>
-        <li>
-          <form action="/search" method="GET">
-            <input type="text" name="query" placeholder="Search...">
-            <button type="submit">Search</button>
-          </form>
-        </li>
-      </ul>
-    </nav>
+<div class="container">
+  <div class="jumbotron mt-4">
+    <h1 class="display-4">Welcome to Our Wonderful App!</h1>
+    <p class="lead">This is a simple app where you can create posts, manage your library, and more.</p>
+    <% if (!user) { %>
+      <hr class="my-4">
+      <p>New here? Sign up now and start creating amazing content!</p>
+      <a class="btn btn-primary btn-lg" href="/register" role="button">Sign Up</a>
+    <% } %>
+  </div>
+</div>
 
-    <main>
-      <form action="/register" method="POST">
-        <% errors.forEach(error => { %>
-        <p class="notice"><%= error %></p>
-        <% }) %>
-        <fieldset>
-          <legend>Create an account</legend>
-          <label for="username"><small>Username</small></label>
-          <input type="text" id="username" name="username" autocomplete="off" />
-          <label for="password"><small>Password</small></label>
-          <input type="password" id="password" name="password" autocomplete="off" />
-          <br />
-          <button>Sign Up</button>
-        </fieldset>
-      </form>
-    </main>
-
-    <%- include('includes/footer') %>
-  </body>
-</html>
+<%- include('includes/footer') %>
