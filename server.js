@@ -188,7 +188,6 @@ app.post("/edit-post/:id", mustBeLoggedIn, (req, res) => {
   // if you're not the author, redirect to homepage
   if (post.authorid !== req.user.userid) {
     return res.redirect("/")
-  }
 
   const errors = sharedPostValidation(req)
 

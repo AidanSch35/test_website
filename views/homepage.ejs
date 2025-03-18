@@ -4,20 +4,36 @@
   <body>
     <%- include('includes/header') %>
 
+    <!-- Navbar -->
+    <nav>
+      <ul>
+        <% if (!user) { %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/register">Sign Up</a></li>
+        <% } else { %>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/library">My Library</a></li>
+        <% } %>
+        <li>
+          <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+
     <main>
       <form action="/register" method="POST">
         <% errors.forEach(error => { %>
         <p class="notice"><%= error %></p>
         <% }) %>
-
         <fieldset>
           <legend>Create an account</legend>
           <label for="username"><small>Username</small></label>
           <input type="text" id="username" name="username" autocomplete="off" />
-
           <label for="password"><small>Password</small></label>
           <input type="password" id="password" name="password" autocomplete="off" />
-
           <br />
           <button>Sign Up</button>
         </fieldset>
