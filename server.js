@@ -188,6 +188,7 @@ app.post("/edit-post/:id", mustBeLoggedIn, (req, res) => {
   // if you're not the author, redirect to homepage
   if (post.authorid !== req.user.userid) {
     return res.redirect("/")
+  }
 
   const errors = sharedPostValidation(req)
 
@@ -303,5 +304,15 @@ app.post("/register", (req, res) => {
 
   res.redirect("/")
 })
+
+app.get("/profile", mustBeLoggedIn, (req, res) => {
+  // Render the profile page for the logged-in user
+  res.render("profile", { user: req.user });
+});
+
+app.get("/library", mustBeLoggedIn, (req, res) => {
+  // Render the library page for the logged-in user
+  res.render("library", { user: req.user });
+});
 
 app.listen(3000)
