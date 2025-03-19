@@ -5,6 +5,7 @@ const sanitizeHTML = require("sanitize-html")
 const bcrypt = require("bcrypt")
 const cookieParser = require("cookie-parser")
 const express = require("express")
+const helmet = require("helmet")
 const db = require("better-sqlite3")("ourApp.db")
 db.pragma("journal_mode = WAL")
 
@@ -39,6 +40,7 @@ createTables()
 // database setup ends here
 
 const app = express()
+app.use(helmet())
 
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: false }))
@@ -84,6 +86,10 @@ app.get("/login", (req, res) => {
   res.render("login")
 })
 
+app.get("/register", (req, res) => {
+  res.render("register")
+})
+
 app.get("/logout", (req, res) => {
   res.clearCookie("ourSimpleApp")
   res.redirect("/")
@@ -123,7 +129,7 @@ app.post("/login", (req, res) => {
 
   res.cookie("ourSimpleApp", ourTokenValue, {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     maxAge: 1000 * 60 * 60 * 24
   })
@@ -297,7 +303,7 @@ app.post("/register", (req, res) => {
 
   res.cookie("ourSimpleApp", ourTokenValue, {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     maxAge: 1000 * 60 * 60 * 24
   })
